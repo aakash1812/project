@@ -24,8 +24,8 @@ export default class Dashboard extends Component {
         }
     }
     componentDidMount() {
-        // let token = localStorage.getItem('token');
-        let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnZW5kZXIiOiJtYWxlIiwiX2lkIjoiNWMxY2EwZjY2ZTQzZjkxYzA3MzcwOWZlIiwiZmlyc3RfbmFtZSI6ImFuY2hhbCIsImxhc3RfbmFtZSI6InVzZXIiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwicGFzc3dvcmQiOiJzaGExJGFjODRlZWIzJDEkYTIzZGEwNWFkOTA2M2I0MmRhMjdkNGQ1NTkzZGMwOWNiYjdmNGFjYiIsImNyZWF0ZWRBdCI6IjIwMTgtMTItMjFUMDg6MTQ6NDYuODc2WiIsInVwZGF0ZWRBdCI6IjIwMTgtMTItMjFUMDg6MTQ6NDYuODc2WiIsImNvdW50ZXIiOjEsIl9fdiI6MCwiaWF0IjoxNTQ1NDAyNjkwLCJleHAiOjE1NDU0ODcyOTB9.spFZNjWYxNaR-zI9M-ckgnXUa68MAhHAfbFCgsmqQRI";
+         let token = localStorage.getItem('token');
+        //let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnZW5kZXIiOiJtYWxlIiwiX2lkIjoiNWMxY2EwZjY2ZTQzZjkxYzA3MzcwOWZlIiwiZmlyc3RfbmFtZSI6ImFuY2hhbCIsImxhc3RfbmFtZSI6InVzZXIiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwicGFzc3dvcmQiOiJzaGExJGFjODRlZWIzJDEkYTIzZGEwNWFkOTA2M2I0MmRhMjdkNGQ1NTkzZGMwOWNiYjdmNGFjYiIsImNyZWF0ZWRBdCI6IjIwMTgtMTItMjFUMDg6MTQ6NDYuODc2WiIsInVwZGF0ZWRBdCI6IjIwMTgtMTItMjFUMDg6MTQ6NDYuODc2WiIsImNvdW50ZXIiOjEsIl9fdiI6MCwiaWF0IjoxNTQ1NDAyNjkwLCJleHAiOjE1NDU0ODcyOTB9.spFZNjWYxNaR-zI9M-ckgnXUa68MAhHAfbFCgsmqQRI";
 
         let type = localStorage.getItem('type');
         let authToken = type + ' ' + token;
