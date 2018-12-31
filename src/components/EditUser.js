@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Modal from './Modal';
 import axios from 'axios';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+import Index from './Index';
+
 
 export default class EditUser extends Component {
     constructor(props) {
@@ -43,6 +46,15 @@ export default class EditUser extends Component {
             new_lname: e.target.value
         });
     }
+
+
+    back_to_list = (id) => {
+        console.log();
+        this.props.history.push({
+          pathname: '/index'
+       //   search: id
+        })}
+
     componentDidMount() {
         let token = localStorage.getItem('token');
         let type = localStorage.getItem('type');
@@ -98,7 +110,35 @@ export default class EditUser extends Component {
                     "Authorization": authToken
                 }
             }
-        ).then();
+        ).then(
+            res => {
+                this.props.history.push({
+                    pathname: '/index'
+                 //   search: id
+                  })
+            
+        }
+        )
+        .catch((error) => {
+            // Error
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                // console.log(error.response.data);
+                // console.log(error.response.status);
+                // console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+        });
+
     }
 
 
