@@ -2,7 +2,10 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-import TableRow from './TableRow';
+import DelUser from './DelUser';
+
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 export default class Index extends Component {
 
@@ -123,7 +126,44 @@ export default class Index extends Component {
             </form>
           </div>
         </div>
-        <table className="table table-striped">
+
+        <ReactTable
+            data={this.state.serverports}
+            columns={[
+                {
+                    Header: "ID",
+                    Cell: row => (row.original._id)
+                },
+                {
+                    Header: "Name",
+                    Cell: row => (`${row.original.first_name} ${row.original.last_name}`)
+                },
+                {
+                    Header: "Email",
+                    Cell: row => (row.original.email)
+                },
+                {
+                    Header: "Gender",
+                    Cell: row => (row.original.gender)
+                },
+                {
+                    Header: "Action",
+                    Cell: row => (
+                        <div>
+                            <button onClick={()=>this.editUser(row._id)}>
+                                Edit
+                            </button>
+                            <DelUser onDelete={() => this.delUser(row._id, row._id)} />
+                        </div>
+                    )
+                },
+            ]}
+            defaultPageSize={10}
+            className="-striped -highlight"
+        />
+
+
+        {/* <table className="table table-striped">
           <thead>
             <tr>
               <td>ID</td>
@@ -140,7 +180,7 @@ export default class Index extends Component {
               })
             }
           </tbody>
-        </table>
+        </table> */}
 
       </div>
     );
