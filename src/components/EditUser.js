@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import Modal from './Modal';
 import axios from 'axios';
@@ -21,23 +20,27 @@ export default class EditUser extends Component {
     }
     onChangeHostemail(e) {
         this.setState({
-            email: e.target.value
+            eemail: e.target.value,
+            new_email: e.target.value
         });
     }
 
     onChangeHostGender(e) {
         this.setState({
-            gender: e.target.value
+            ggender: e.target.value,
+            new_gender: e.target.value
         });
     }
     onChangeFname(e) {
         this.setState({
-            first_name: e.target.value
+            fname: e.target.value,
+            new_fname: e.target.value
         });
     }
     onChangeLname(e) {
         this.setState({
-            last_name: e.target.value
+            lname: e.target.value,
+            new_lname: e.target.value
         });
     }
     componentDidMount() {
@@ -63,13 +66,11 @@ export default class EditUser extends Component {
             // if (token) {
             res => {
                 if (res.data) {
-                    // serverports.splice(index, 1);
-                    // this.setState({ ...this.state, serverports })
                     this.setState({
                         fname: res.data.data.user.first_name,
                         lname: res.data.data.user.last_name,
-                        gender: res.data.data.user.gender,
-                        email: res.data.data.user.email
+                        ggender: res.data.data.user.gender,
+                        eemail: res.data.data.user.email
                     });
                 }
             }
@@ -78,10 +79,10 @@ export default class EditUser extends Component {
     onSubmit(e) {
         e.preventDefault();
         const serverport = {
-            email: this.state.email,
-            gender: this.state.gender,
-            first_name: this.state.first_name,
-            last_name: this.state.last_name
+            email: this.state.new_email,
+            gender: this.state.new_gender,
+            first_name: this.state.new_fname,
+            last_name: this.state.new_lname
 
         }
         let token = localStorage.getItem('token');
@@ -90,33 +91,14 @@ export default class EditUser extends Component {
 
         let id = this.state.user_id;
         axios.put(
-            'http://192.168.6.234:3000/users/' + id,
+            'http://192.168.6.234:3000/users/' + id, serverport,
             {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Authorization": authToken
                 }
             }
-        ).then(
-            // if (token) {
-            res => {
-                if (res.data) {
-                    // serverports.splice(index, 1);
-                    // this.setState({ ...this.state, serverports })
-                    this.setState({
-                        fname: res.data.data.user.first_name,
-                        lname: res.data.data.user.last_name,
-                        gender: res.data.data.user.gender,
-                        email: res.data.data.user.email
-                    });
-                }
-            }
-        );
-
-        this.setState({
-            email: '',
-            password: ''
-        });
+        ).then();
     }
 
 
@@ -130,7 +112,7 @@ export default class EditUser extends Component {
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <label>First Name:  </label>
-                                    <input type="text" className="form-control" onChange={evt => this.setState({ ...this.state, first_name: evt.target.value })} placeholder="Please enter first name" value={this.state.fname} />
+                                    <input type="text" className="form-control" onChange={this.onChangeFname} placeholder="Please enter first name" value={this.state.fname} />
                                 </div>
                                 <div className="form-group">
                                     <label>Last Name:  </label>
@@ -138,7 +120,7 @@ export default class EditUser extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label>Gender: </label>
-                                    <select onChange={this.onChangeHostGender} className="form-control" value={this.state.gender}>
+                                    <select onChange={this.onChangeHostGender} className="form-control" value={this.state.ggender}>
                                         <option value="">---Please select the gender---</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -146,7 +128,7 @@ export default class EditUser extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label>Email:  </label>
-                                    <input type="text" className="form-control" onChange={this.onChangeHostemail} placeholder="Please enter Email" value={this.state.email} />
+                                    <input type="text" className="form-control" onChange={this.onChangeHostemail} placeholder="Please enter Email" value={this.state.eemail} />
                                 </div>
                                 <div className="form-group">
                                     <input type="submit" value="Update" className="btn btn-primary" />
@@ -159,3 +141,5 @@ export default class EditUser extends Component {
         );
     }
 }
+
+
